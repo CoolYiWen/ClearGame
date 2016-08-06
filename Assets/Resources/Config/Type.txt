@@ -1,0 +1,3 @@
+ID	TypeName	IconName1	IconName2	IconName3
+ID	类型名	图标名字1	图标名字2	图标名字3
+0	leaves	green	red	pink
