@@ -45,6 +45,7 @@ public class UIManager : MonoBehaviour {
 	string m_CurTypeName = "";
 	Dictionary<DataType, string> m_TypeDict = new Dictionary<DataType, string>();
 	
+    //设定索引器
 	#region getter and setter
 	public Vector3 TopLeft
 	{
@@ -75,11 +76,13 @@ public class UIManager : MonoBehaviour {
 	
 	MoveDir m_CurDir  = MoveDir.None;
 	
+    //游戏数据
 	GameData m_GameData = null;
 	GameObject[,] m_Items;
-	
+	//添加移动后的item
 	ArrayList m_HeadTempItemList = new ArrayList();		// move rigit and up use head list to add temp items
 	ArrayList m_TailTempItemList = new ArrayList();		// move left and down use tail list to add temp items
+
 	Vector3 m_CurPressItemOriPos = Vector3.zero;
 	float m_fCurMoveDelta = 0;
 	int m_CurDeltaNum;
@@ -132,11 +135,13 @@ public class UIManager : MonoBehaviour {
 		
 		// init game ui
 		UIPanel panel = m_GamePanel.GetComponent<UIPanel>();
-        panel.baseClipRegion = new Vector4(m_GameBoardBottomRight.x - NumCol * m_fItemWidth/2, 0, 
+
+        panel.baseClipRegion = new Vector4(m_GameBoardBottomRight.x - NumCol * m_fItemWidth/2, m_GameBoardBottomRight.y + NumRow*m_fItemHeight/2, 
 			(m_GameBoardBottomRight.x - m_GameBoardTopLeft.x), 
 			(m_GameBoardTopLeft.y - m_GameBoardBottomRight.y));
+       
         m_GameFrame.transform.localPosition = new Vector3(m_GameBoardBottomRight.x - NumCol * m_fItemWidth/2, m_GameBoardBottomRight.y + NumRow*m_fItemHeight/2, 0);
-		SetItemSize(m_GameFrame,m_GameBoardBottomRight.x - m_GameBoardTopLeft.x + m_fBoardRightPadding*2, 
+        SetItemSize(m_GameFrame,m_GameBoardBottomRight.x - m_GameBoardTopLeft.x + m_fBoardRightPadding*2, 
 			m_GameBoardTopLeft.y - m_GameBoardBottomRight.y + m_fBoardTopPadding + m_fBoardBottomPadding);
 		
 		UIEventListener.Get(m_RestartButton).onClick += OnClickRestart;
